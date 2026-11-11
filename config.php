@@ -1,10 +1,19 @@
 <?php
-// Database settings: edit for your server.
-const DB_HOST = 'db.fr-roub1.bengt.wasmernet.com';
-const DB_NAME = 'hostel_finder';
-const DB_USER = 'user_767b95e6';
-const DB_PASS = 'pw_GfN4Am3NR0uAGPrPtIG0rLQ3amxPlzMq';
-
+// On Wasmer the database details come from environment variables.
+// On your own PC the values after the ?: are used instead.
+function env_or(string $key, string $default): string
+{
+    $v = getenv($key);
+    if ($v === false) {
+        $v = $_SERVER[$key] ?? $_ENV[$key] ?? false;
+    }
+    return ($v !== false && $v !== '') ? (string)$v : $default;
+}
+define('DB_HOST', env_or('DB_HOST', 'localhost'));
+define('DB_PORT', env_or('DB_PORT', '3306'));
+define('DB_NAME', env_or('DB_NAME', 'hostel_finder'));
+define('DB_USER', env_or('DB_USERNAME', 'root'));
+define('DB_PASS', env_or('DB_PASSWORD', ''));
 // Photo uploads
 const UPLOAD_DIR = __DIR__ . '/uploads/hostels';
 const UPLOAD_URL = 'uploads/hostels';
@@ -34,7 +43,7 @@ function db(): PDO
     static $pdo = null;
     if ($pdo === null) {
         $pdo = new PDO(
-            'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+            'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4',
             DB_USER,
             DB_PASS,
             [
