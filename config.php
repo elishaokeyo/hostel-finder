@@ -1,9 +1,9 @@
 <?php
 // Database settings: edit for your server.
-const DB_HOST = 'localhost';
+const DB_HOST = 'db.fr-roub1.bengt.wasmernet.com';
 const DB_NAME = 'hostel_finder';
-const DB_USER = 'root';
-const DB_PASS = '';
+const DB_USER = 'user_767b95e6';
+const DB_PASS = 'pw_GfN4Am3NR0uAGPrPtIG0rLQ3amxPlzMq';
 
 // Photo uploads
 const UPLOAD_DIR = __DIR__ . '/uploads/hostels';
