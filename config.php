@@ -47,12 +47,8 @@ function db(): PDO
             DB_USER,
             DB_PASS,
             [
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::MYSQL_ATTR_SSL_CA => '/etc/ssl/certs/ca-certificates.crt',
-                    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
-                ]
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]
         );
         // Tables and columns are created automatically, so no extra import is needed.
