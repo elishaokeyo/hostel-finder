@@ -23,7 +23,7 @@
         <a href="reviews.php">Reviews<?= $pending ? ' <span class="badge">' . $pending . '</span>' : '' ?></a>
         <a href="users.php">Landlords</a>
       <?php endif; ?>
-      <a href="../index.php" target="_blank" rel="noopener">View site</a>
+      <a href="../index.php" target="_parent" rel="noopener">View site</a>
       <a href="login.php?logout=1">Log out</a>
     </nav>
   </header>

@@ -268,7 +268,12 @@
   $('helpBtn').addEventListener('click', startTour);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !tour.hidden) endTour(); });
 
-  fetch('api/data.php').then(r => r.json()).then(d => {
+  const loadData = (tries = 3) => fetch('api/data.php', { cache: 'no-store' })
+    .then(r => r.json())
+    .catch(err => tries > 1
+      ? new Promise(res => setTimeout(res, 700)).then(() => loadData(tries - 1))
+      : Promise.reject(err));
+  loadData().then(d => {
     if (d.error) throw new Error(d.error);
     hostels = d.hostels; places = d.places;
     $('place').innerHTML = places.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('');
