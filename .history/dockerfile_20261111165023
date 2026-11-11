@@ -1,0 +1,10 @@
+FROM php:8.2-apache
+
+# Copy all project files into the container's web root
+COPY . /var/www/html/
+
+# Enable Apache rewrite module if needed for clean URLs
+RUN a2enmod rewrite
+
+# Expose port 80 (Render expects web services to listen on port 80 or $PORT)
+EXPOSE 80

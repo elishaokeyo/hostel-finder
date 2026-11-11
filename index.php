@@ -122,6 +122,7 @@ $waText = "Hello, I would like a landlord account on Hostel Finder.\n\nName: \nH
     </section>
   </main>
 
+
   <div id="tour" class="tour" role="dialog" aria-label="Quick tour" aria-live="polite" hidden>
     <div class="tour-top"><span id="tourStep"></span><button type="button" id="tourSkip" class="linkbtn">Skip tour</button></div>
     <h2 id="tourTitle"></h2>
