@@ -11,16 +11,16 @@
 
   const map = L.map('map');
   const street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+    maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', attribution: '&copy; OpenStreetMap contributors'
   });
   const detailed = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    maxZoom: 19, subdomains: 'abc', attribution: '&copy; OpenStreetMap contributors, tiles by HOT'
+    maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', subdomains: 'abc', attribution: '&copy; OpenStreetMap contributors, tiles by HOT'
   });
   const imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 19, maxNativeZoom: 17, attribution: 'Imagery &copy; Esri'
+    maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', maxNativeZoom: 17, attribution: 'Imagery &copy; Esri'
   });
   const names = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 19, maxNativeZoom: 17
+    maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', maxNativeZoom: 17
   });
   street.addTo(map);
   L.control.layers({ 'Street': street, 'Detailed streets': detailed, 'Satellite': L.layerGroup([imagery, names]) }).addTo(map);
