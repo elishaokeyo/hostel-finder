@@ -47,31 +47,37 @@ function db(): PDO
             DB_USER,
             DB_PASS,
             [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::MYSQL_ATTR_SSL_CA => '/etc/ssl/certs/ca-certificates.crt',
+                    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
+                ]
             ]
         );
         // Tables and columns are created automatically, so no extra import is needed.
-        $pdo->exec("CREATE TABLE IF NOT EXISTS hostel_photos (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            hostel_id INT NOT NULL,
-            filename VARCHAR(80) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (hostel_id) REFERENCES hostels(id) ON DELETE CASCADE
-        )");
-        $pdo->exec("CREATE TABLE IF NOT EXISTS reviews (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            hostel_id INT NOT NULL,
-            reviewer_name VARCHAR(60) NOT NULL,
-            rating TINYINT NOT NULL,
-            comment VARCHAR(1000) NOT NULL DEFAULT '',
-            ip_hash CHAR(64) NOT NULL,
-            status ENUM('pending','approved') NOT NULL DEFAULT 'approved',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (hostel_id) REFERENCES hostels(id) ON DELETE CASCADE
-        )");
-        ensure_column('reviews', 'status', "status ENUM('pending','approved') NOT NULL DEFAULT 'approved'");
-        ensure_column('hostels', 'owner_id', 'owner_id INT NULL');
+        if (env_or('RUN_MIGRATIONS', '1') === '1') {
+            $pdo->exec("CREATE TABLE IF NOT EXISTS hostel_photos (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                hostel_id INT NOT NULL,
+                filename VARCHAR(80) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (hostel_id) REFERENCES hostels(id) ON DELETE CASCADE
+            )");
+            $pdo->exec("CREATE TABLE IF NOT EXISTS reviews (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                hostel_id INT NOT NULL,
+                reviewer_name VARCHAR(60) NOT NULL,
+                rating TINYINT NOT NULL,
+                comment VARCHAR(1000) NOT NULL DEFAULT '',
+                ip_hash CHAR(64) NOT NULL,
+                status ENUM('pending','approved') NOT NULL DEFAULT 'approved',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (hostel_id) REFERENCES hostels(id) ON DELETE CASCADE
+            )");
+            ensure_column('reviews', 'status', "status ENUM('pending','approved') NOT NULL DEFAULT 'approved'");
+            ensure_column('hostels', 'owner_id', 'owner_id INT NULL');
+        }
     }
     return $pdo;
 }
