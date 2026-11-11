@@ -1,0 +1,7 @@
+.git
+.history
+mnt
+database.sql
+README.txt
+*.zip
+dbtest.php
