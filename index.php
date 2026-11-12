@@ -122,6 +122,15 @@ $waText = "Hello, I would like a landlord account on Hostel Finder.\n\nName: \nH
     </section>
   </main>
 
+  <footer class="simple-footer">
+    <p>&copy; <?= date('Y') ?> Hostel Finder &middot; Designed and developed by <strong>ELISHA OKEYO</strong></p>
+    <p>
+      <a href="admin/login.php">Landlord login</a>
+      <?php if ($wa): ?>&middot; <a href="https://wa.me/<?= $wa ?>" target="_blank" rel="noopener">Contact us on WhatsApp</a><?php endif; ?>
+    &middot; Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
+    </p>
+  </footer>
+
 
   <div id="tour" class="tour" role="dialog" aria-label="Quick tour" aria-live="polite" hidden>
     <div class="tour-top"><span id="tourStep"></span><button type="button" id="tourSkip" class="linkbtn">Skip tour</button></div>

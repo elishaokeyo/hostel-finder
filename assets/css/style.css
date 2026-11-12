@@ -107,4 +107,9 @@ dialog h2{margin:0 2rem .2rem 0}
 .wa-ask strong{color:var(--brand)}
 .wa-ask:hover{border-color:var(--brand)}
 
+.simple-footer{margin-top:2rem;padding:1.2rem clamp(1rem,4vw,3rem);text-align:center;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);background:var(--surface)}
+.simple-footer p{margin:.2rem 0}
+.simple-footer a{color:var(--brand);text-decoration:none}
+.simple-footer a:hover{text-decoration:underline}
+
 
