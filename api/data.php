@@ -9,8 +9,8 @@ try {
 
     $photos = [];
     foreach (db()->query('SELECT hostel_id, filename FROM hostel_photos ORDER BY id') as $row) {
-        $photos[(int)$row['hostel_id']][] = UPLOAD_URL . '/' . $row['filename'];
-    }
+        $photos[(int)$row['hostel_id']][] = (PHOTO_BASE ? PHOTO_BASE . '/' : '') . UPLOAD_URL . '/' . $row['filename'];
+            }
 
     foreach ($hostels as &$h) {
         $h['id']              = (int)$h['id'];
