@@ -18,11 +18,7 @@ define('DB_PASS', env_or('DB_PASSWORD', ''));
 // Photo uploads
 const UPLOAD_DIR = __DIR__ . '/uploads/hostels';
 const UPLOAD_URL = 'uploads/hostels';
-// Photo uploads
-const UPLOAD_DIR = __DIR__ . '/uploads/hostels';
-const UPLOAD_URL = 'uploads/hostels';
-
-
+define('PHOTO_BASE', rtrim(env_or('PHOTO_BASE_URL', ''), '/'));
 // Hours a visitor must wait before reviewing the same hostel again. Set to 0 while testing.
 const REVIEW_COOLDOWN_HOURS = 24;
 
