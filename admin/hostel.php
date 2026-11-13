@@ -25,6 +25,7 @@ if ($id) {
 function save_photos(int $hostelId): array {
     $errs = [];
     if (empty($_FILES['photos']['name'][0])) return $errs;
+     if (PHOTO_BASE) return ['Photo uploads are turned off on this address. Please upload photos on the main site.'];
     if (!is_dir(UPLOAD_DIR)) mkdir(UPLOAD_DIR, 0755, true);
 
     $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
@@ -198,7 +199,7 @@ require __DIR__ . '/_header.php';
   <div class="photogrid">
     <?php foreach ($photos as $p): ?>
     <figure>
-      <img src="../<?= h(UPLOAD_URL . '/' . $p['filename']) ?>" alt="Hostel photo">
+      <img src="<?= h((PHOTO_BASE ? PHOTO_BASE . '/' : '../') . UPLOAD_URL . '/' . $p['filename']) ?>" alt="Hostel photo">
       <form method="post">
         <?= csrf_field() ?><input type="hidden" name="action" value="delete_photo">
         <input type="hidden" name="id" value="<?= $id ?>"><input type="hidden" name="photo_id" value="<?= (int)$p['id'] ?>">
