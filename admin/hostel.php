@@ -198,8 +198,7 @@ require __DIR__ . '/_header.php';
   <div class="sechead"><h2>Photos</h2></div>
   <div class="photogrid">
     <?php foreach ($photos as $p): ?>
-    <figure>
-      <img src="<?= h((PHOTO_BASE ? PHOTO_BASE . '/' : '../') . UPLOAD_URL . '/' . $p['filename']) ?>" alt="Hostel photo">
+    <figure><img src="../image.php?file=<?= h(urlencode($p['filename'])) ?>" alt="Hostel photo">
       <form method="post">
         <?= csrf_field() ?><input type="hidden" name="action" value="delete_photo">
         <input type="hidden" name="id" value="<?= $id ?>"><input type="hidden" name="photo_id" value="<?= (int)$p['id'] ?>">
