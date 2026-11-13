@@ -7,10 +7,10 @@ try {
     $hostels = db()->query('SELECT * FROM hostels ORDER BY name')->fetchAll();
     $places  = db()->query('SELECT * FROM places ORDER BY is_default DESC, name')->fetchAll();
 
-    $photos = [];
+       $photos = [];
     foreach (db()->query('SELECT hostel_id, filename FROM hostel_photos ORDER BY id') as $row) {
-        $photos[(int)$row['hostel_id']][] = (PHOTO_BASE ? PHOTO_BASE . '/' : '') . UPLOAD_URL . '/' . $row['filename'];
-            }
+        $photos[(int)$row['hostel_id']][] = 'image.php?file=' . urlencode($row['filename']);
+    }
 
     foreach ($hostels as &$h) {
         $h['id']              = (int)$h['id'];
